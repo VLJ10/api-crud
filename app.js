@@ -66,6 +66,7 @@ app.post('/v1/locadora/inserir/filme', cors(), bodyParserJSON, async (request, r
     response.json(filme)
 
 })
+//atualiza o Filme
 app.put('/v1/locadora/atualizar/filme/:id', cors(), bodyParserJSON, async (request, response) => {
     //Recebe um objeto JSON pelo body da requisição
     let dadosBody = request.body
@@ -81,6 +82,17 @@ app.put('/v1/locadora/atualizar/filme/:id', cors(), bodyParserJSON, async (reque
     response.json(filme)
 
 })
+//Exclui um filme filtrando pelo id
+app.delete('/v1/locadora/deletar/filme/:id', cors(), async (request, response) => {
+
+    let idFilme = request.params.id
+
+    let filme = await controllerFilme.excluirFilmes(idFilme)
+
+    response.status(filme.status_code)
+    response.json(filme)
+})
+
 
 app.listen(PORT, () => {
     console.log('API aguardando requisições.....')

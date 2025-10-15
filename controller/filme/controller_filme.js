@@ -168,7 +168,31 @@ const atualizarFilmes = async function (filme, id, contentType) {
 
 //Exclui um filme filtrando pelo id
 const excluirFilmes = async function (id) {
+    let MESSAGE = JSON.parse(JSON.stringify(MESSAGE_DEFAUT))
 
+    try {
+        let validarId = await buscarFilmesId(id)
+        
+        if (validarId.status_code == 200) {
+
+            let result = await filmeDAO.setDeleteFilms(parseInt(id))
+
+            if (result) {
+                MESSAGE.HEADER.status       = MESSAGE.SUCESS_DELETE_ITEM.status
+                MESSAGE.HEADER.status_code  = MESSAGE.SUCESS_DELETE_ITEM.status_code
+                MESSAGE.HEADER.message      = MESSAGE.SUCESS_DELETE_ITEM.message
+
+                return MESSAGE.HEADER //204
+            } else {
+                return MESSAGE.ERROR_INTERNAL_SERVER_MODEL //500
+            }
+            
+        } else {
+            return validarId //Retorno da função de buscarFilmeId 400 ou 404 ou 505
+        }
+    } catch (error) {
+        return MESSAGE.ERROR_INTERNAL_SERVER_CONTROLLER //500
+    }
 }
 
 //Validação dos dados de cadastro do Filme
@@ -219,5 +243,6 @@ module.exports = {
     listarFilmes,
     buscarFilmesId,
     inserirFilmes,
-    atualizarFilmes
+    atualizarFilmes,
+    excluirFilmes
 }

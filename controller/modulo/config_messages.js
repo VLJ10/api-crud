@@ -30,6 +30,7 @@ const ERROR_CONTENT_TYPE                = {status: false, status_code: 415, mess
 const SUCESS_REQUEST      = { status: true, status_code: 200, message: 'Requisicao bem sucedida!!' }
 const SUCESS_CREATED_ITEM = { status: true, status_code: 201, message: 'Requisição bem sucedida, objeto criado com sucesso !!' }
 const SUCESS_UPDATED_ITEM = { status: true, status_code: 200, message: 'Requisicao bem sucedida, Objeto atualizado com sucesso !!' }
+const SUCESS_DELETE_ITEM  = { status: true, status_code: 200, message: 'Requisicao bem sucedida, Objeto excluido com sucesso !!' }
 
 
 module.exports = {
@@ -37,6 +38,7 @@ module.exports = {
         SUCESS_REQUEST,
         SUCESS_CREATED_ITEM,
         SUCESS_UPDATED_ITEM,
+        SUCESS_DELETE_ITEM,
         ERROR_NOT_FOUND,
         ERROR_INTERNAL_SERVER_MODEL,
         ERROR_INTERNAL_SERVER_CONTROLLER,
